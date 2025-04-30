@@ -22,12 +22,16 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 2px solid #ffffffdc;
+}
+
+.navbar:hover {
+    border-color: aquamarine;
 }
 
 .navbar .logo img {
     width: 170px;
     cursor: pointer;
-    transition: filter 0.3s ease;
 }
 
 .navbar .logo img:hover {
@@ -57,7 +61,7 @@ body {
     width: 0;
     height: 2px;
     left: 0;
-    bottom: -1px;
+    bottom: -3px;
     background-color: aquamarine;
     transition: 0.3s ease;
 }
@@ -80,7 +84,6 @@ body {
     border: 2px solid #ffffffdc;
     outline: none;
     font-size: 17px;
-    margin-right: 10px;
     width: 150px;
     background-color: transparent;
     color: #ffffffdc;
@@ -102,17 +105,128 @@ body {
     cursor: pointer;
 }
 
-.search input:hover {
+.search input:hover,
+.search input:hover::placeholder,
+.search button:hover,
+.login-field input:hover,
+.login-container:hover,
+.login-field input:hover::placeholder,
+.login-form button:hover,
+.login-field-checkbox label:hover {
     border-color: aquamarine;
     color: aquamarine;
 }
 
-.search input:hover::placeholder {
+.popup {
+    display: none;
+    position: fixed;
+    top: 110px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1000;
+    justify-content: flex-end;
+}
+
+.popup-content {
+    background: rgb(0 0 0 / 0.5);
+    padding: 20px;
+    border: 2px solid #ffffffdc;
+    border-radius: 5px;
+    width: 225px;
+    color: #ffffffdc;
+}
+
+.popup-content:hover {
     border-color: aquamarine;
+}
+
+.login-container {
+    background-color: rgb(0 0 0 / 0.5);
+    color: #ffffffdc;
+    padding: 35px;
+    margin: 25px auto;
+    width: 30%;
+    text-align: center;
+    height: auto;
+    border-radius: 25px;
+    border: 2px solid #ffffffdc;
+}
+
+.login-field {
+    width: 100%;
+    overflow: visible;
+    margin: 30px 0;
+}
+
+.login-field input {
+    padding: 7px 15px;
+    border-radius: 25px;
+    border: 2px solid #ffffffdc;
+    outline: none;
+    font-size: 17px;
+    width: 100%;
+    background-color: transparent;
+    color: #ffffffdc;
+    box-sizing: border-box;
+}
+
+.login-field input:focus {
+    background-color: transparent;
+}
+
+.login-field-checkbox {
+    padding: 7px 15px;
+    font-size: 17px;
+    width: 100%;
+    background-color: transparent;
+    color: #ffffffdc;
+    display: flex;
+    margin: 30px 0;
+}
+
+.login-form button {
+    width: 35%;
+    font-size: 17px;
+    padding: 7px 15px;
+    background-color: transparent;
+    color: #ffffffdc;
+    border: 2px solid #ffffffdc;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.login-a ul {
+    list-style: none;
+    margin: 25px 0 0 0;
+}
+
+.login-a ul li {
+    position: relative;
+}
+
+.login-a ul li a {
+    text-decoration: none;
+    color: #ffffffdc;
+    font-size: 17px;
+    transition: 0.3s ease;
+}
+
+.login-a ul li a::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    left: 1;
+    bottom: -3px;
+    background-color: aquamarine;
+    transition: 0.3s ease;
+}
+
+.login-a ul li a:hover {
     color: aquamarine;
 }
 
-.search button:hover {
-    border-color: aquamarine;
-    color: aquamarine;
+.login-a ul li a:hover::before {
+    width: 157px;
 }

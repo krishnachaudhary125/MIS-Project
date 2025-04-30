@@ -25,6 +25,33 @@
             <div class="search">
                 <input type="text" value="" placeholder="Search...">
                 <button type="submit"><i class="fa fa-search"></i></button>
+                <button onclick="location.href='index.php'"><i class="fa fa-shopping-cart"></i></button>
+                <button onclick="togglePopup()"><i class="fa fa-user"></i></button>
             </div>
         </nav>
     </header>
+    <div id="accountPopup" class="popup">
+        <div class="popup-content">
+            Hello
+        </div>
+    </div>
+
+    <script>
+    function togglePopup() {
+        const popup = document.getElementById('accountPopup');
+        if (popup.style.display === 'flex') {
+            popup.style.display = 'none';
+        } else {
+            popup.style.display = 'flex';
+        }
+    }
+
+    // Close the popup when clicking outside the content
+    window.onclick = function(event) {
+        const popup = document.getElementById('accountPopup');
+        const content = document.querySelector('.popup-content');
+        if (event.target === popup && !content.contains(event.target)) {
+            popup.style.display = 'none';
+        }
+    };
+    </script>
