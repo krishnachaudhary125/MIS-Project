@@ -4,3 +4,115 @@
     box-sizing: border-box;
     font-family: sans-serif;
 }
+
+body {
+    background-image: url("../photos/bg1.jpeg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: 100%;
+    object-fit: contain;
+}
+
+.navbar {
+    /* background-color: #212529; */
+    /* background-color: #343a40; */
+    background-color: rgb(0 0 0 / 0.5);
+    height: 110px;
+    padding: 15px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo img {
+    width: 170px;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+}
+
+.navbar .logo img:hover {
+    filter: brightness(0) saturate(100%) invert(74%) sepia(18%) saturate(631%) hue-rotate(100deg) brightness(103%) contrast(96%);
+}
+
+.navbar ul {
+    list-style: none;
+    gap: 25px;
+    display: flex;
+}
+
+.navbar ul li {
+    position: relative;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: #ffffffdc;
+    font-size: 20px;
+    transition: 0.3s ease;
+}
+
+.navbar ul li a::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    left: 0;
+    bottom: -1px;
+    background-color: aquamarine;
+    transition: 0.3s ease;
+}
+
+.navbar ul li a:hover {
+    color: aquamarine;
+}
+
+.navbar ul li a:hover::before {
+    width: 100%;
+}
+
+.secrch {
+    transition: 0.3s ease;
+}
+
+.search input {
+    padding: 7px 15px;
+    border-radius: 25px;
+    border: 2px solid #ffffffdc;
+    outline: none;
+    font-size: 17px;
+    margin-right: 10px;
+    width: 150px;
+    background-color: transparent;
+    color: #ffffffdc;
+    transition: 0.3s ease;
+}
+
+.search input:focus {
+    width: 200px;
+    background-color: transparent;
+}
+
+.search button {
+    font-size: 17px;
+    padding: 7px 15px;
+    background-color: transparent;
+    color: #ffffffdc;
+    border: 2px solid #ffffffdc;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.search input:hover {
+    border-color: aquamarine;
+    color: aquamarine;
+}
+
+.search input:hover::placeholder {
+    border-color: aquamarine;
+    color: aquamarine;
+}
+
+.search button:hover {
+    border-color: aquamarine;
+    color: aquamarine;
+}
