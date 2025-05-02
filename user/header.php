@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="../photos/main-logo.png" alt="Logo">
+                <img src="../photos/main-logo.png" alt="Logo" onclick="location.href='index.php'">
             </div>
             <ul>
                 <li><a href="index.php">Home</a></li>
@@ -32,26 +32,42 @@
     </header>
     <div id="accountPopup" class="popup">
         <div class="popup-content">
-            Hello
+            <ul>
+                <li><a href="login.php">Sign In<i class="fa fa-sign-in"></i></a></li>
+                <li><a href="register.php">Sign Up<i class="fa fa-user-plus"></i></a></li>
+            </ul>
         </div>
     </div>
 
-    <script>
-    function togglePopup() {
-        const popup = document.getElementById('accountPopup');
-        if (popup.style.display === 'flex') {
-            popup.style.display = 'none';
-        } else {
-            popup.style.display = 'flex';
-        }
-    }
+    <div class="main-container">
 
-    // Close the popup when clicking outside the content
-    window.onclick = function(event) {
-        const popup = document.getElementById('accountPopup');
-        const content = document.querySelector('.popup-content');
-        if (event.target === popup && !content.contains(event.target)) {
-            popup.style.display = 'none';
+        <script>
+        function togglePopup() {
+            const popup = document.getElementById('accountPopup');
+            if (popup.style.display === 'flex') {
+                popup.style.display = 'none';
+            } else {
+                popup.style.display = 'flex';
+            }
         }
-    };
-    </script>
+
+        // Close the popup when clicking outside the content
+        window.onclick = function(event) {
+            const popup = document.getElementById('accountPopup');
+            const content = document.querySelector('.popup-content');
+            if (event.target === popup && !content.contains(event.target)) {
+                popup.style.display = 'none';
+            }
+        };
+        const container = document.querySelector('.main-container');
+        let scrollTimeout;
+
+        container.addEventListener('scroll', () => {
+            container.classList.add('scrolling');
+
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                container.classList.remove('scrolling');
+            }, 500); // Revert after 500ms of inactivity
+        });
+        </script>
