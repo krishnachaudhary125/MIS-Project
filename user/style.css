@@ -127,7 +127,8 @@ body {
 .register-form button:hover,
 .register-field-checkbox label:hover,
 .register-popup:hover,
-.register-popup button:hover {
+.register-popup button:hover,
+.login-popup:hover {
     border-color: aquamarine;
     color: aquamarine;
 }
@@ -305,7 +306,8 @@ body {
     background-color: rgb(0 0 0 / 0.5);
 }
 
-.register-success-popup {
+.register-success-popup,
+.login-success-popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -318,7 +320,8 @@ body {
     z-index: 9999;
 }
 
-.register-popup {
+.register-popup,
+.login-popup {
     background-color: rgb(0 0 0 / 0.5);
     border: 2px solid #ffffffdc;
     padding: 35px;

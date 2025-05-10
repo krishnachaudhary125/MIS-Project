@@ -2,10 +2,40 @@
 include "header.php";
 include "../database/connection.php";
 
+$error = "";
+$loginSuccess = false;
+
+if (isset($_POST['submit']) == true) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $pswHash = sha1($password);
+
+    $select_query = "SELECT user_id AS id, fullname, role FROM users WHERE email='$email' && password='$pswHash'
+    UNION
+    SELECT admin_id AS id, fullname, role FROM admin WHERE email='$email' && password='$pswHash'";
+    
+    $result = mysqli_query($conn, $select_query);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_array($result);
+        $loginSuccess = true;
+
+        if ($row['role'] == 'admin' || $row['role'] == 'owner') {
+            $_SESSION['role'] = $row['role'];
+            $_SESSION['admin_id'] = $row['id'];
+            $_SESSION['admin_name'] = $row['fullname'];
+        } elseif ($row['role'] == 'user') {
+            $_SESSION['role'] = $row['role'];
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['user_name'] = $row['fullname'];
+        }
+    } else {
+        $error = 'Incorrect email or password!';
+    }
+}
 ?>
 
 <div class="login-container">
-    <form action="">
+    <form action="#" method="post">
         <h1>Log In To Wonder Kitchen</h1>
         <div class="login-form">
             <div id="errorDisplay" style="color: red; margin-bottom: 10px;">
@@ -23,7 +53,7 @@ include "../database/connection.php";
                 <input type="checkbox" id="togglePassword">
                 <label for="togglePassword" id="toggleLabel">&nbsp;&nbsp;Show Password</label>
             </div>
-            <button type="submit">Log In</button>
+            <button type="submit" id="submit" name="submit">Log In</button>
             <div class="login-a">
                 <ul>
                     <li>
@@ -34,6 +64,24 @@ include "../database/connection.php";
         </div>
     </form>
 </div>
+
+<?php if ($loginSuccess): ?>
+<div id="loginSuccessPopup" class="login-success-popup">
+    <div class="login-popup">
+        <div class="login-popup-field">
+            <h2>Login Successful!</h2>
+        </div>
+        <div class="login-popup-field">
+            <p>Redirecting to home page...</p>
+        </div>
+    </div>
+</div>
+<script>
+setTimeout(function() {
+    window.location.href = "index.php";
+}, 2000);
+</script>
+<?php endif; ?>
 
 <script>
 const checkbox = document.getElementById("togglePassword");
