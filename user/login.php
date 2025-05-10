@@ -1,11 +1,18 @@
 <?php
 include "header.php";
+include "../database/connection.php";
+
 ?>
 
 <div class="login-container">
     <form action="">
         <h1>Log In To Wonder Kitchen</h1>
         <div class="login-form">
+            <div id="errorDisplay" style="color: red; margin-bottom: 10px;">
+                <?php if (!empty($error)): ?>
+                <?php echo $error; ?>
+                <?php endif; ?>
+            </div>
             <div class="login-field">
                 <input type="email" value="" id="email" name="email" placeholder="E-Mail">
             </div>
