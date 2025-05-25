@@ -1,10 +1,12 @@
 <?php
 include "header.php";
-include "../function/home_function.php";
+include "../function/product_function.php";
 ?>
+
 <?php
-home();
+product();
 ?>
+
 <?php
 include "footer.php";
 ?>

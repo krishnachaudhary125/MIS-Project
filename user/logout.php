@@ -1,5 +1,27 @@
-<?php session_start();
+<?php
+include "header.php";
+session_start();
 session_unset();
 session_destroy();
-header("location: ../SourceCode/index.php");
+
+$redirectUrl = "index.php";
+$logoutSuccess = true;
 ?>
+<?php if ($logoutSuccess): ?>
+
+<div id="logoutSuccessPopup" class="logout-success-popup">
+    <div class="logout-popup">
+        <div class="logout-popup-field">
+            <h2>Logout Successful!</h2>
+        </div>
+        <div class="logout-popup-field">
+            <p>Redirecting.....to home.</p>
+        </div>
+    </div>
+</div>
+<script>
+setTimeout(function() {
+    window.location.href = "<?php echo $redirectUrl; ?>";
+}, 2000);
+</script>
+<?php endif; ?>

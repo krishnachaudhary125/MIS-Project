@@ -1,5 +1,8 @@
 <?php 
 session_start();
+include "../function/home_function.php";
+include "../function/product_function.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +11,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../user/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -19,13 +22,11 @@ session_start();
                 <img src="../photos/main-logo.png" alt="Logo" onclick="location.href='index.php'">
             </div>
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="product.php">Product</a></li>
+                <li><a href="dashboard.php?home">Home</a></li>
+                <li><a href="dashboard.php?product">Product</a></li>
+                <li><a href="dashboard.php">Dashboard</a></li>
             </ul>
             <div class="search">
-                <input type="text" value="" placeholder="Search...">
-                <button type="submit"><i class="fa fa-search"></i></button>
-                <button onclick="location.href='index.php'"><i class="fa fa-shopping-cart"></i></button>
                 <button onclick="togglePopup()"><i class="fa fa-user"></i></button>
             </div>
         </nav>
@@ -33,22 +34,29 @@ session_start();
     <div id="accountPopup" class="popup">
         <div class="popup-content">
             <ul>
-                <?php if (isset($_SESSION['user_name'])): ?>
+                <?php if (isset($_SESSION['admin_name'])): ?>
                 <li>
-                    <h3><strong><?php echo $_SESSION['user_name']; ?></strong></h3>
+                    <h3><strong><?php echo $_SESSION['admin_name']; ?></strong></h3>
                 </li>
                 <div class="profile">
-                    <li><a href="logout.php">Log Out<i class="fa fa-sign-out"></i></a></li>
+                    <li><a href="../user/logout.php">Log Out<i class="fa fa-sign-out"></i></a></li>
                 </div>
-                <?php else: ?>
-                <li><a href="login.php">Sign In<i class="fa fa-sign-in"></i></a></li>
-                <li><a href="register.php">Sign Up<i class="fa fa-user-plus"></i></a></li>
                 <?php endif; ?>
             </ul>
         </div>
     </div>
 
     <div class="main-container">
+        <?php
+        if (isset($_GET['home'])) {
+            home();
+        }
+        ?>
+        <?php
+        if (isset($_GET['product'])) {
+            product();
+        }
+        ?>
 
         <script>
         function togglePopup() {

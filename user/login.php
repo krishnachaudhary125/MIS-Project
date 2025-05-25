@@ -4,6 +4,7 @@ include "../database/connection.php";
 
 $error = "";
 $loginSuccess = false;
+$redirectUrl = "";
 
 if (isset($_POST['submit']) == true) {
     $email = $_POST['email'];
@@ -23,16 +24,19 @@ if (isset($_POST['submit']) == true) {
             $_SESSION['role'] = $row['role'];
             $_SESSION['admin_id'] = $row['id'];
             $_SESSION['admin_name'] = $row['fullname'];
+            $redirectUrl = "../admin/dashboard.php";
         } elseif ($row['role'] == 'user') {
             $_SESSION['role'] = $row['role'];
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['user_name'] = $row['fullname'];
+            $redirectUrl = "index.php";
         }
     } else {
         $error = 'Incorrect email or password!';
     }
 }
 ?>
+
 
 <div class="login-container">
     <form action="#" method="post">
@@ -72,16 +76,17 @@ if (isset($_POST['submit']) == true) {
             <h2>Login Successful!</h2>
         </div>
         <div class="login-popup-field">
-            <p>Redirecting to home page...</p>
+            <p>Redirecting...</p>
         </div>
     </div>
 </div>
 <script>
 setTimeout(function() {
-    window.location.href = "index.php";
+    window.location.href = "<?php echo $redirectUrl; ?>";
 }, 2000);
 </script>
 <?php endif; ?>
+
 
 <script>
 const checkbox = document.getElementById("togglePassword");
