@@ -27,7 +27,7 @@ include "../function/product_function.php";
                 <li><a href="dashboard.php">Dashboard</a></li>
             </ul>
             <div class="search">
-                <button onclick="togglePopup()"><i class="fa fa-user"></i></button>
+                <button onclick="togglePopup()"><i class="fa fa-user-secret"></i></button>
             </div>
         </nav>
     </header>
