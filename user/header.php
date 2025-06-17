@@ -60,7 +60,6 @@ session_start();
             }
         }
 
-        // Close the popup when clicking outside the content
         window.onclick = function(event) {
             const popup = document.getElementById('accountPopup');
             const content = document.querySelector('.popup-content');

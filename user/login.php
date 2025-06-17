@@ -24,7 +24,7 @@ if (isset($_POST['submit']) == true) {
             $_SESSION['role'] = $row['role'];
             $_SESSION['admin_id'] = $row['id'];
             $_SESSION['admin_name'] = $row['fullname'];
-            $redirectUrl = "../admin/dashboard.php";
+            $redirectUrl = "../admin/dashboard.php?statistics";
         } elseif ($row['role'] == 'user') {
             $_SESSION['role'] = $row['role'];
             $_SESSION['user_id'] = $row['id'];
@@ -83,7 +83,7 @@ if (isset($_POST['submit']) == true) {
 <script>
 setTimeout(function() {
     window.location.href = "<?php echo $redirectUrl; ?>";
-}, 2000);
+}, 500);
 </script>
 <?php endif; ?>
 

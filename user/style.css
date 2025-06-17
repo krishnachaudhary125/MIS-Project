@@ -135,9 +135,15 @@ body {
 .register-popup:hover,
 .register-popup button:hover,
 .login-popup:hover,
-.logout-popup:hover {
+.logout-popup:hover,
+.category-popup-button:hover,
+.tdaction button:hover {
     border-color: aquamarine;
     color: aquamarine;
+}
+
+.add-category-popup:hover {
+    border-color: aquamarine;
 }
 
 .popup {
@@ -152,7 +158,7 @@ body {
 }
 
 .popup-content {
-    background: rgb(0 0 0 / 0.5);
+    background: rgb(0 0 0 / 0.9);
     padding: 20px;
     border: 2px solid #ffffffdc;
     border-radius: 5px;
@@ -236,7 +242,8 @@ body {
 
 .login-form button,
 .register-form button,
-.register-popup button {
+.register-popup button,
+.category-popup-button {
     width: 35%;
     font-size: 17px;
     padding: 7px 15px;
@@ -371,6 +378,7 @@ body {
     padding: 20px;
     overflow-y: auto;
     border-right: 2px solid #ffffffdc;
+    flex-shrink: 0;
 }
 
 .sidebar-nav ul {
@@ -389,4 +397,136 @@ body {
     bottom: -3px;
     background-color: aquamarine;
     transition: 0.3s ease;
+}
+
+.category-main {
+    min-height: 400px;
+    width: calc(100% - 200px);
+    margin: 35px auto 0px 200px;
+    background-color: rgb(0 0 0 / 0.5);
+    border-radius: 30px;
+    padding: 0px 20px 20px 20px;
+    border: 2px solid #ffffffdc;
+    color: #ffffffdc;
+    flex-grow: 1;
+}
+
+.dashboard-body {
+    display: flex;
+}
+
+.dashboard-main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.category-body {
+    width: 400px;
+    overflow-x: auto;
+    padding: 20px;
+}
+
+.tdaction button {
+    width: 35%;
+    font-size: 17px;
+    padding: 7px 15px;
+    background-color: transparent;
+    color: #ffffffdc;
+    border: 2px solid #ffffffdc;
+    border-radius: 25px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.category-header {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 10px 20px;
+}
+
+.category-data table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.category-data thead {
+    border-bottom: 2px solid aquamarine;
+}
+
+.category-data th,
+.category-data td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ffffff33;
+    font-size: 16px;
+}
+
+.category-data tbody tr:hover {
+    background-color: rgb(255 255 255 / 0.05);
+}
+
+.category-data th {
+    color: aquamarine;
+    text-align: center;
+}
+
+.tdsno,
+.tdcategory,
+.tdaction {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.thcategory,
+.tdcategory {
+    width: 50%;
+}
+
+.thsno,
+.tdsno {
+    width: 10%;
+}
+
+.thaction,
+.tdaction {
+    width: 20%;
+}
+
+.tdaction i {
+    font-size: 18px;
+}
+
+.popup-category {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 2rem;
+}
+
+.add-category-popup {
+    border: 2px solid #ffffffdc;
+    color: #ffffffdc;
+    position: absolute;
+    min-height: 230px;
+    width: 35%;
+    margin: 113px 39% 25px;
+    background-color: rgb(0 0 0 / 0.7);
+    overflow: auto;
+    border-radius: 30px;
+    padding: 0px 20px 0px 20px;
 }

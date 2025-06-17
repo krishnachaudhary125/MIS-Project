@@ -22,6 +22,6 @@ $logoutSuccess = true;
 <script>
 setTimeout(function() {
     window.location.href = "<?php echo $redirectUrl; ?>";
-}, 2000);
+}, 500);
 </script>
 <?php endif; ?>
