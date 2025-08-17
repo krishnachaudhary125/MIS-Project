@@ -430,7 +430,8 @@ body {
     padding: 20px;
 }
 
-.admin-body {
+.admin-body,
+.user-body {
     width: 950px;
     overflow-x: auto;
     padding: 20px;
