@@ -584,3 +584,82 @@ body {
     border-radius: 25px;
     cursor: pointer;
 }
+
+.popup-edit-category {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 2rem;
+    z-index: 1000;
+}
+
+.edit-category-popup {
+    border: 2px solid #ffffffdc;
+    color: #ffffffdc;
+    position: absolute;
+    min-height: 230px;
+    width: 35%;
+    margin: 113px 39% 25px;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
+    border-radius: 30px;
+    padding: 0px 20px 0px 20px;
+}
+
+.edit-category-header {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid aquamarine;
+}
+
+.edit-category-field {
+    width: 100%;
+    overflow: visible;
+    margin: 21px 0;
+    font-weight: bold;
+}
+
+.edit-category-field input {
+    padding: 7px 15px;
+    border-radius: 25px;
+    border: 2px solid #ffffffdc;
+    outline: none;
+    font-size: 17px;
+    width: 100%;
+    background-color: transparent;
+    color: #ffffffdc;
+    box-sizing: border-box;
+}
+
+.edit-category-button button {
+    width: 35%;
+    font-size: 17px;
+    padding: 7px 15px;
+    background-color: transparent;
+    color: #ffffffdc;
+    border: 2px solid #ffffffdc;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.edit-category-close-btn {
+    color: #ffffffdc;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.edit-category-close-btn:hover,
+.edit-category-close-btn:focus {
+    color: aquamarine;
+    text-decoration: none;
+}
