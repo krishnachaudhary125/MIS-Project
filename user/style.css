@@ -943,3 +943,59 @@ textarea {
     width: 125px;
     border-radius: 7px;
 }
+
+/* Dashboard Boxes */
+.box-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin-bottom: 50px;
+    margin-left: 220px;
+    /* Added to avoid sidebar (sidebar width + some padding) */
+}
+
+.box {
+    height: 200px;
+    width: 370px;
+    border-radius: 20px;
+    border: 2px solid aquamarine;
+    padding: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* dark background */
+    color: #ffffffdc;
+    /* default text color */
+}
+
+.box:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.box i {
+    font-size: 85px;
+    color: aquamarine;
+    /* icon color */
+}
+
+.box .text {
+    color: #ffffffdc;
+    font-size: 20px;
+}
+
+.box .text .topic-heading {
+    font-size: 36px;
+    color: aquamarine;
+    margin: 0;
+}
+
+.box .text .topic {
+    font-size: 18px;
+    color: #ffffffdc;
+    margin: 0;
+}
