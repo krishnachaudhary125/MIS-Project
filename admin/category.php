@@ -73,7 +73,7 @@ if (isset($_POST['edit_submit'])) {
             <form method="post">
                 <div class="add-category-field">
                     <input type="text" id="categoryInput" name="categoryInput" placeholder="Add Category" required
-                        pattern="^[a-zA-Z0-9\s]+$">
+                        pattern="^[a-zA-Z\s&,]+$">
                 </div>
                 <div class="add-category-button">
                     <button type="submit" name="submit">Submit</button>
@@ -94,7 +94,7 @@ if (isset($_POST['edit_submit'])) {
                 <input type="hidden" name="edit_id" id="edit_id">
                 <div class="add-category-field">
                     <input type="text" id="edit_categoryInput" name="edit_categoryInput" placeholder="Edit Category"
-                        required pattern="^[a-zA-Z0-9\s]+$">
+                        required pattern="^[a-zA-Z\s&,]+$">
                 </div>
                 <div class="add-category-button">
                     <button type="submit" name="edit_submit">Update</button>
