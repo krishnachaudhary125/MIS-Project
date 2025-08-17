@@ -530,3 +530,57 @@ body {
     border-radius: 30px;
     padding: 0px 20px 0px 20px;
 }
+
+.close-btn {
+    color: #ffffffdc;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: aquamarine;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.add-category-header {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid aquamarine;
+}
+
+.add-category-field {
+    width: 100%;
+    overflow: visible;
+    margin: 21px 0;
+    font-weight: bold;
+}
+
+.add-category-field input {
+    padding: 7px 15px;
+    border-radius: 25px;
+    border: 2px solid #ffffffdc;
+    outline: none;
+    font-size: 17px;
+    width: 100%;
+    background-color: transparent;
+    color: #ffffffdc;
+    box-sizing: border-box;
+}
+
+.add-category-button button {
+    width: 35%;
+    font-size: 17px;
+    padding: 7px 15px;
+    background-color: transparent;
+    color: #ffffffdc;
+    border: 2px solid #ffffffdc;
+    border-radius: 25px;
+    cursor: pointer;
+}

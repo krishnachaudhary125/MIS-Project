@@ -1,6 +1,54 @@
 <?php
 include "../database/connection.php";
+
+if (isset($_POST['submit'])) {
+    $category = mysqli_real_escape_string($conn, trim($_POST['categoryInput']));
+
+    if (empty($category)) {
+        echo "<script>alert('Category input cannot be empty.');</script>";
+    } else {
+        // Check if category already exists
+        $select_query = "SELECT * FROM category WHERE category_name = ?";
+        $stmt = $conn->prepare($select_query);
+
+        if ($stmt === false) {
+            error_log("SQL Prepare Error: " . $conn->error);
+            echo "<script>alert('A database error occurred. Please try again later.');</script>";
+            exit();
+        }
+
+        $stmt->bind_param("s", $category);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            echo "<script>alert('This category already exists.');</script>";
+        } else {
+            $stmt->close(); // close SELECT stmt
+
+            // Insert category
+            $sqlQuery = "INSERT INTO category (category_name) VALUES (?)";
+            $stmt = $conn->prepare($sqlQuery);
+
+            if ($stmt === false) {
+                error_log("SQL Prepare Error: " . $conn->error);
+                echo "<script>alert('A database error occurred. Please try again later.');</script>";
+                exit();
+            }
+
+            $stmt->bind_param("s", $category);
+
+            if ($stmt->execute()) {
+                echo "<script>alert('Category added successfully.'); window.location.reload();</script>";
+            } else {
+                echo "<script>alert('Error adding category.');</script>";
+            }
+        }
+        $stmt->close();
+    }
+}
 ?>
+
 
 <div class="popup-category" id="categoryPopup">
     <div class="add-category-popup">
@@ -11,8 +59,7 @@ include "../database/connection.php";
         <div class="category-popup-body">
             <form action="" method="post" name="category_popup">
                 <div class="add-category-field">
-                    <label for="categoryInput">Add Category</label>
-                    <input type="text" id="categoryInput" name="categoryInput" placeholder="Input Category" required
+                    <input type="text" id="categoryInput" name="categoryInput" placeholder="Add Category" required
                         pattern="^[a-zA-Z0-9\s]+$">
                 </div>
                 <div class="add-category-button">
@@ -52,14 +99,20 @@ include "../database/connection.php";
                         <tr>
                             <td class="tdsno"><?php echo $i . '.'; ?></td>
                             <td class="tdcategory">
-                                <?php echo htmlspecialchars($row_data['category_name'], ENT_QUOTES, 'UTF-8'); ?></td>
-                            <td class="tdaction">
-                                <button type="submit"><i class="fa fa-edit"></i></button>
+                                <?php echo htmlspecialchars($row_data['category_name'], ENT_QUOTES, 'UTF-8'); ?>
                             </td>
                             <td class="tdaction">
-                                <button type="submit"><i class="fa fa-trash"></i></button>
+                                <button type="button" onclick="editCategory(<?php echo $row_data['category_id']; ?>)">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                            </td>
+                            <td class="tdaction">
+                                <button type="button" onclick="deleteCategory(<?php echo $row_data['category_id']; ?>)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
                             </td>
                         </tr>
+
                         <?php endwhile; ?>
                     </tbody>
                 </table>
