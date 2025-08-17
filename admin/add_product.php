@@ -105,10 +105,7 @@ $stmt->bind_param("sisdss", $productName, $categoryId, $description, $productPri
                         <th class="tdcategory">Photo</th>
                         <th class="tdcategory">Product Name</th>
                         <th class="tdcategory">Category</th>
-                        <th class="tdcategory">Description</th>
                         <th class="tdcategory">Price</th>
-                        <th class="tdcategory">Keyword</th>
-                        <th class="thadmin">Admin ID</th>
                         <th class="thaction">Actions</th>
                     </tr>
                 </thead>
@@ -129,10 +126,7 @@ $stmt->bind_param("sisdss", $productName, $categoryId, $description, $productPri
                         </td>
                         <td class="tdcategory"><?= htmlspecialchars($row['product_name']); ?></td>
                         <td class="tdcategory"><?= htmlspecialchars($row['category_name']); ?></td>
-                        <td class="tdcategory"><?= htmlspecialchars($row['description']); ?></td>
                         <td class="tdcategory"><?= htmlspecialchars($row['product_price']); ?></td>
-                        <td class="tdcategory"><?= htmlspecialchars($row['product_keyword']); ?></td>
-                        <td class="adminid"><?= $row['admin_id']; ?></td>
                         <td class="tdaction">
                             <button type="button" onclick="deleteProduct(<?= $row['product_id']; ?>)">
                                 <i class="fa fa-trash"></i>

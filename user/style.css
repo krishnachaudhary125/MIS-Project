@@ -938,3 +938,8 @@ textarea {
     color: black;
     background-color: white;
 }
+
+.product_photo {
+    width: 125px;
+    border-radius: 7px;
+}
