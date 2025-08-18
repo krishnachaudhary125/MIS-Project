@@ -146,7 +146,7 @@ body {
     border-color: aquamarine;
 }
 
-.popup {
+.popup-sign {
     display: none;
     position: fixed;
     top: 113px;

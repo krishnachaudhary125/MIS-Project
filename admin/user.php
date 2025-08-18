@@ -1,5 +1,12 @@
 <?php
 include '../database/connection.php';
+
+if (!isset($_SESSION['role']) ||$_SESSION['role'] !== 'owner' || $_SESSION['role'] !== 'admin') {
+    echo "<script>alert('Unauthorized page!');</script>";
+    echo "<script>window.location.href = '../user/index.php';</script>";
+    exit();
+}
+
 ?>
 <div class="category-container">
     <div class="category-main">

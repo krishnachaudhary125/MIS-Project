@@ -30,7 +30,7 @@ session_start();
             </div>
         </nav>
     </header>
-    <div id="accountPopup" class="popup">
+    <div id="accountPopup" class="popup-sign">
         <div class="popup-content">
             <ul>
                 <?php if (isset($_SESSION['user_name'])): ?>

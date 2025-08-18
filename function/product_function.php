@@ -43,8 +43,6 @@ function product() {
     </div>
 </div>
 
-
-
 <?php
         }
     } else {

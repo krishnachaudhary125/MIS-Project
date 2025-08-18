@@ -1,6 +1,12 @@
 <?php
 include "../database/connection.php";
 
+if (!isset($_SESSION['role']) ||$_SESSION['role'] !== 'owner' || $_SESSION['role'] !== 'admin') {
+    echo "<script>alert('Unauthorized page!');</script>";
+    echo "<script>window.location.href = '../user/index.php';</script>";
+    exit();
+}
+
 // Get logged-in admin info
 $logged_in_admin_id = $_SESSION['admin_id'] ?? null;
 $logged_in_admin_role = isset($_SESSION['role']) ? strtolower(trim($_SESSION['role'])) : null;

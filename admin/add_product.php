@@ -1,6 +1,12 @@
 <?php
 include '../Database/connection.php';
 
+if (!isset($_SESSION['role']) ||$_SESSION['role'] !== 'owner' || $_SESSION['role'] !== 'admin') {
+    echo "<script>alert('Unauthorized page!');</script>";
+    echo "<script>window.location.href = '../user/index.php';</script>";
+    exit();
+}
+
 if (isset($_POST['submit'])) {
 
     $productName = trim($_POST['product_name']);
