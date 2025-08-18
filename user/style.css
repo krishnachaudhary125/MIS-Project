@@ -503,6 +503,10 @@ body {
     width: 10%;
 }
 
+td {
+    color: #ffffffdc;
+}
+
 .thaction,
 .tdaction {
     width: 20%;
@@ -998,4 +1002,107 @@ textarea {
     font-size: 18px;
     color: #ffffffdc;
     margin: 0;
+}
+
+/* Cart Header */
+.products-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: aquamarine;
+    margin: 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Table Styling */
+.cart-table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.cart-th,
+.cart-td {
+    border: 2px solid aquamarine;
+    padding: 12px;
+    color: white;
+}
+
+.cart-th {
+    background-color: rgba(0, 255, 170, 0.2);
+    font-size: 18px;
+}
+
+/* Cart Photo */
+.products-cart-photo {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Empty Cart Message */
+.empty-cart {
+    color: red;
+    text-align: center;
+    padding: 50px 0;
+}
+
+/* Checkout Section */
+.checkout {
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 2px solid aquamarine;
+    border-radius: 10px;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Total Price */
+.checkout p {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: aquamarine;
+}
+
+/* Buttons */
+.remove,
+.check-out {
+    font-size: 17px;
+    padding: 10px 25px;
+    background-color: transparent;
+    color: #ffffffdc;
+    border: 2px solid aquamarine;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-left: 10px;
+}
+
+.remove:hover {
+    background-color: crimson;
+    border-color: crimson;
+    color: #fff;
+}
+
+.check-out:hover {
+    background-color: aquamarine;
+    color: #000;
+    border-color: aquamarine;
+}
+
+/* Checkout Button Align */
+#checkoutForm {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
 }

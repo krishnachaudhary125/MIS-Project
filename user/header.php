@@ -25,7 +25,7 @@ session_start();
             <div class="search">
                 <input type="text" value="" placeholder="Search...">
                 <button type="submit"><i class="fa fa-search"></i></button>
-                <button onclick="location.href='index.php'"><i class="fa fa-shopping-cart"></i></button>
+                <button onclick="location.href='cart.php'"><i class="fa fa-shopping-cart"></i></button>
                 <button onclick="togglePopup()"><i class="fa fa-user"></i></button>
             </div>
         </nav>

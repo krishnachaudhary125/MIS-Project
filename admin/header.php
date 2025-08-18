@@ -31,14 +31,14 @@ include "../function/product_function.php";
             <ul>
                 <li><a href="dashboard.php?home">Home</a></li>
                 <li><a href="dashboard.php?product">Product</a></li>
-                <li><a href="dashboard.php">Dashboard</a></li>
+                <li><a href="dashboard.php?statistics">Dashboard</a></li>
             </ul>
             <div class="search">
                 <button onclick="togglePopup()"><i class="fa fa-user-secret"></i></button>
             </div>
         </nav>
     </header>
-    <div id="accountPopup" class="popup">
+    <div id="accountPopup" class="popup-sign">
         <div class="popup-content">
             <ul>
                 <?php if (isset($_SESSION['admin_name'])): ?>
