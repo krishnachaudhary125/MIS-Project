@@ -1,12 +1,6 @@
 <?php
 include '../../Database/connection.php';
 
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'owner' && $_SESSION['role'] !== 'admin') {
-    echo "<script>alert('Unauthorized page!');</script>";
-    echo "<script>window.location.href = '../../user/index.php';</script>";
-    exit();
-}
-
 if (isset($_GET['id'])) {
     $product_id = intval($_GET['id']);
 
@@ -26,7 +20,7 @@ if (isset($_GET['id'])) {
 
     if ($row['product_count'] == 0) {
         echo "<script>alert('Product not found.');</script>";
-        echo "<script>window.location.href = '../dashboard.php?add_products';</script>";
+        echo "<script>window.location.href = '../dashboard.php?add_product';</script>";
         exit();
     }
 
@@ -47,9 +41,9 @@ if (isset($_GET['id'])) {
     }
 
     $stmt->close();
-    echo "<script>window.location.href = '../dashboard.php?add_products';</script>";
+    echo "<script>window.location.href = '../dashboard.php?add_product';</script>";
 } else {
     echo "<script>alert('No product ID specified.');</script>";
-    echo "<script>window.location.href = '../dashboard.php?add_products';</script>";
+    echo "<script>window.location.href = '../dashboard.php?add_product';</script>";
 }
 ?>
