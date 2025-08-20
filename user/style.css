@@ -351,22 +351,38 @@ body {
 .product-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: flex-start;
     gap: 25px;
-    padding: 35px;
+    padding: 20px 40px;
 }
 
 .product-box {
     background-color: rgb(0 0 0 / 0.5);
     border: 2px solid #ffffffdc;
     border-radius: 25px;
-    padding: 35px;
+    padding: 25px;
     text-align: center;
     color: #ffffffdc;
-    width: 300px;
+    width: 280px;
     height: auto;
 }
+
+.product-box.hidden-product {
+    display: none;
+    /* hide by default */
+}
+
+.product-box button,
+.view-more-btn {
+    padding: 7px 15px;
+    border-radius: 25px;
+    border: 2px solid #ffffffdc;
+    background-color: transparent;
+    color: #ffffffdc;
+    cursor: pointer;
+}
+
+
 
 .sidebar-nav {
     position: fixed;

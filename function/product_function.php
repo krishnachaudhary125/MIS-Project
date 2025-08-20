@@ -2,9 +2,9 @@
 include '../Database/connection.php';
 
 function product() {
-    global $conn; // Use the database connection
+    global $conn;
 
-    // Handle Add to Cart
+    // Handle Add to Cart (same code as before)...
     if (isset($_POST['add_to_cart'])) {
         $user_id = $_SESSION['user_id'] ?? 0;
         $product_id = intval($_POST['product_id']);
@@ -15,7 +15,7 @@ function product() {
             exit;
         }
 
-        // Check if user has a cart
+        // Get or create cart
         $cart_query = "SELECT cart_id FROM cart WHERE user_id = ?";
         $stmt = $conn->prepare($cart_query);
         $stmt->bind_param("i", $user_id);
@@ -26,7 +26,6 @@ function product() {
             $cart = $cart_result->fetch_assoc();
             $cart_id = $cart['cart_id'];
         } else {
-            // Create new cart
             $insert_cart = "INSERT INTO cart (user_id) VALUES (?)";
             $stmt = $conn->prepare($insert_cart);
             $stmt->bind_param("i", $user_id);
@@ -34,7 +33,7 @@ function product() {
             $cart_id = $stmt->insert_id;
         }
 
-        // Check if product already in cart
+        // Check if product already exists in cart
         $check_item = "SELECT * FROM cart_item WHERE cart_id = ? AND product_id = ?";
         $stmt = $conn->prepare($check_item);
         $stmt->bind_param("ii", $cart_id, $product_id);
@@ -42,13 +41,11 @@ function product() {
         $item_result = $stmt->get_result();
 
         if ($item_result->num_rows > 0) {
-            // Update quantity
             $update_item = "UPDATE cart_item SET quantity = quantity + ? WHERE cart_id = ? AND product_id = ?";
             $stmt = $conn->prepare($update_item);
             $stmt->bind_param("iii", $quantity, $cart_id, $product_id);
             $stmt->execute();
         } else {
-            // Insert new cart item
             $insert_item = "INSERT INTO cart_item (cart_id, product_id, quantity) VALUES (?, ?, ?)";
             $stmt = $conn->prepare($insert_item);
             $stmt->bind_param("iii", $cart_id, $product_id, $quantity);
@@ -59,65 +56,73 @@ function product() {
         exit;
     }
 
-    // Fetch products from the database
-    $query = "SELECT * FROM product ORDER BY product_id DESC";
-    $result = mysqli_query($conn, $query);
+    // Fetch all categories
+    $category_query = "SELECT * FROM category ORDER BY category_id ASC";
+    $categories = mysqli_query($conn, $category_query);
 
-    if (!$result) {
-        echo "<p>Error fetching products: " . mysqli_error($conn) . "</p>";
+    if (!$categories) {
+        echo "<p>Error fetching categories: " . mysqli_error($conn) . "</p>";
         return;
     }
 
-    echo '<div class="product-container">';
+    while ($cat = mysqli_fetch_assoc($categories)) {
+        // Fetch products for this category
+        $product_query = "SELECT * FROM product WHERE category_id = " . intval($cat['category_id']) . " ORDER BY product_id DESC";
+        $products = mysqli_query($conn, $product_query);
 
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            ?>
-<div class="product-box"
-    style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; width: 300px; min-height: 400px; padding: 20px; border-radius: 20px; background-color: rgba(0,0,0,0.85); color: #ffffffdc; box-sizing: border-box;">
+        if (mysqli_num_rows($products) === 0) {
+            continue; // ❌ Skip this category if no products
+        }
+
+        // ✅ Show only categories that have products
+        echo "<h2 style='color:#fff; text-align:left; margin:25px 40px;'>" . htmlspecialchars($cat['category_name']) . "</h2>";
+        echo '<div class="product-container" id="category-' . $cat['category_id'] . '">';
+
+        $count = 0;
+        while ($row = mysqli_fetch_assoc($products)) {
+            $count++;
+            $hiddenClass = ($count > 8) ? "hidden-product" : "";
+?>
+<div class="product-box <?php echo $hiddenClass; ?>">
     <div class="product-image">
         <img src="<?php echo '../uploads/' . htmlspecialchars($row['product_photo']); ?>"
             alt="<?php echo htmlspecialchars($row['product_name']); ?>"
-            style="width: 150px; height: 150px; object-fit: cover; border-radius: 10px;">
+            style="width:150px; height:150px; object-fit:cover; border-radius:10px;">
     </div>
-    <div class="product-info" style="text-align: center; margin-top: 15px;">
+    <div class="product-info" style="text-align:center; margin-top:15px;">
         <h2><?php echo htmlspecialchars($row['product_name']); ?></h2>
-        <p style="height: 60px; overflow: hidden; margin: 5px 0;">
+        <p style="height:60px; overflow:hidden; margin:5px 0;">
             <?php 
                 $maxLength = 60;
                 $description = htmlspecialchars($row['description']);
                 echo (strlen($description) > $maxLength) ? substr($description, 0, $maxLength) . '...' : $description;
             ?>
         </p>
-        <p>Price (Npr): <span
-                id="price-<?php echo $row['product_id']; ?>"><?php echo number_format($row['product_price'], 2); ?></span>
-        </p>
+        <p>Price (Npr): <span><?php echo number_format($row['product_price'], 2); ?></span></p>
 
-        <!-- Add to Cart Form with quantity + button -->
+        <!-- Add to Cart Form -->
         <form method="post" action="" class="add-to-cart-form">
             <input type="hidden" name="product_id" value="<?php echo $row['product_id']; ?>">
             <div style="display:flex; align-items:center; justify-content:center; gap:5px; margin-bottom:5px;">
-                <button type="button" onclick="changeQuantity('qty-<?php echo $row['product_id']; ?>', -1)"
-                    style="width:30px; height:30px; font-size:20px; border-radius:5px; background-color:#000000cc; color:#ffffff; border:none; cursor:pointer;">-</button>
-                <input type="number" name="quantity" id="qty-<?php echo $row['product_id']; ?>" value="1" min="1"
-                    style="width:50px; text-align:center; font-size:16px; border-radius:5px; border:1px solid #ffffffcc; background-color: rgba(0,0,0,0.3); color:#fff;">
-                <button type="button" onclick="changeQuantity('qty-<?php echo $row['product_id']; ?>', 1)"
-                    style="width:30px; height:30px; font-size:20px; border-radius:5px; background-color:#000000cc; color:#ffffff; border:none; cursor:pointer;">+</button>
+                <button type="button" onclick="changeQuantity('qty-<?php echo $row['product_id']; ?>', -1)">-</button>
+                <input type="number" name="quantity" id="qty-<?php echo $row['product_id']; ?>" value="1" min="1">
+                <button type="button" onclick="changeQuantity('qty-<?php echo $row['product_id']; ?>', 1)">+</button>
             </div>
-            <button type="submit" name="add_to_cart"
-                style="padding:7px 15px; border-radius:25px; border:2px solid #ffffffdc; background-color:transparent; color:#ffffffdc; cursor:pointer;">Add
-                to Cart</button>
+            <button type="submit" name="add_to_cart">Add to Cart</button>
         </form>
     </div>
 </div>
-
 <?php
         }
-    } else {
-        echo "<p>No products available.</p>";
-    }
+        echo '</div>';
 
-    echo '</div>';
+        // Show "View More" button only if products > 8
+        if ($count > 8) {
+            echo '<div style="text-align:center; margin-bottom:30px;">
+                    <button class="view-more-btn" onclick="showMore(' . $cat['category_id'] . ')">View More</button>
+                  </div>';
+        }
+    }
 }
 ?>
 
@@ -128,5 +133,11 @@ function changeQuantity(inputId, delta) {
     current += delta;
     if (current < 1) current = 1;
     input.value = current;
+}
+
+function showMore(categoryId) {
+    let hiddenProducts = document.querySelectorAll("#category-" + categoryId + " .hidden-product");
+    hiddenProducts.forEach(p => p.style.display = "block");
+    event.target.style.display = "none"; // hide button after showing
 }
 </script>
